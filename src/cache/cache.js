@@ -384,8 +384,9 @@ module.exports = function(router) {
         this.loadForm(req, 'resource', cache.aliases[alias], cb);
       }
       else {
+        const formPath = alias.split('/')[1] === 'validate' ? alias.split('/')[0] : alias;
         const query = hook.alter('formQuery', {
-          path: alias,
+          path: formPath,
           deleted: {$eq: null}
         }, req);
 
