@@ -19,8 +19,7 @@ const debug = {
 global.Text              = class {};
 global.HTMLElement       = class {};
 global.HTMLCanvasElement = class {};
-// global.navigator         = {userAgent: ''};
-Object.defineProperty(global, 'navigator', {userAgent: ''});
+global.navigator         = {userAgent: ''};
 global.document          = {
   createElement: () => ({}),
   cookie: '',
