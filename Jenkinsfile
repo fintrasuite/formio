@@ -1,5 +1,8 @@
 pipeline {
     agent {  label params.JENKINS_AGENT_LABEL }
+    tools {
+        nodejs 'node20.11'
+    }
     environment {
         def BUILD_DATE =new Date().format("dd-MMM")
         def IMAGE_VERSION = "IMAGE_VERSION=${BULID_DATE}-${BUILD_NUMBER}" 
