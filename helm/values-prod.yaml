@@ -22,9 +22,9 @@ fullnameOverride: ""
 
 healthProbes:
   livenessProbe:
-    path: /api/health
+    path: /health
   readinessProbe:
-    path: /api/health
+    path: /health
   initialDelaySeconds: 10
 
 containerPort: 3001
