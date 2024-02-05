@@ -51,6 +51,7 @@ ENV DEBUG=""
 
 RUN addgroup -S fsuser && adduser -S fsuser -G fsuser
 RUN chown -R fsuser:fsuser /app
+RUN chmod a+w /app
 USER fsuser
 
 # This will initialize the application based on
