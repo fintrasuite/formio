@@ -47,6 +47,7 @@ RUN ln -sf $NPM_PACKAGES/node_modules node_modules
 #   DEBUG=formio:*
 ENV DEBUG=""
 
+RUN addgroup -S fsuser && adduser -S fsuser -G fsuser
 RUN chown -R fsuser:fsuser /app
 USER fsuser
 
