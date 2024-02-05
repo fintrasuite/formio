@@ -1,0 +1,47 @@
+replicaCount: 1
+namespace: "ft-ui"
+
+deployment:
+  env:
+  - name: "NODE_CONFIG"
+    value: '{"mongo": "mongodb+srv://rmmongo:eEdQKzje6lkj9UfY@dev.a58ur6t.mongodb.net/ft-formio","jwt": {"secret": "3N2Mm9KiDm6QOfhdqo795","expireTime": 240}}'
+  - name: "ROOT_EMAIL"
+    value: 'devops@fintrasuite.com'
+  - name: "ROOT_PASSWORD"
+    value: 'z3J90?[F03rg*£R9'
+image:
+  repository: ftcontainerregistryprod.azurecr.io/ft-formio
+  pullPolicy: IfNotPresent
+  tag: 30-Mar-22
+
+imagePullSecrets: []
+nameOverride: "ft-formio"
+fullnameOverride: ""
+
+healthProbes:
+  livenessProbe:
+    path: /api/health
+  readinessProbe:
+    path: /api/health
+  initialDelaySeconds: 10
+
+containerPort: 3001
+
+service:
+  type: ClusterIP
+  port: 3001
+
+resources:
+  limits:
+    cpu: 2
+    memory: 1G
+  requests:
+    cpu: 5m
+    memory: 256Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
