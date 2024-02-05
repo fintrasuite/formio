@@ -82,7 +82,7 @@ pipeline {
                         sh """
                             docker version
                             #docker image prune --all
-                            npm install
+                            npm install 
                             docker build --no-cache --tag ${ACR_REGISTRY}/${REGISTRY_REPO}:${DOCKER_IMAGE_TAG} .
 
                             echo "Executing Docker Commands"
