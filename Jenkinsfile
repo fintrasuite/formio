@@ -83,7 +83,7 @@ pipeline {
                             docker version
                             #docker image prune --all
                             npm install 
-                            docker build --no-cache --tag ${ACR_REGISTRY}/${REGISTRY_REPO}:${DOCKER_IMAGE_TAG} .
+                            docker build --no-cache  -f Dockerfile_prod --tag ${ACR_REGISTRY}/${REGISTRY_REPO}:${DOCKER_IMAGE_TAG} .
 
                             echo "Executing Docker Commands"
                             set +x; ${DOCKER_COMMAND}&> /dev/null
