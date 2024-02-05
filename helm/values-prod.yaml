@@ -4,7 +4,7 @@ namespace: "ft-ui"
 deployment:
   env:
   - name: "NODE_CONFIG"
-    value: '{"mongo": "mongodb+srv://rmmongo:eEdQKzje6lkj9UfY@dev.a58ur6t.mongodb.net/ft-formio","jwt": {"secret": "3N2Mm9KiDm6QOfhdqo795","expireTime": 240}}'
+    value: ${FORMIO_NODE_CONFIG}
   - name: "ROOT_EMAIL"
     value: 'devops@fintrasuite.com'
   - name: "ROOT_PASSWORD"
