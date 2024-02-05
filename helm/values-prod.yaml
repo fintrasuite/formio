@@ -9,6 +9,8 @@ deployment:
     value: 'devops@fintrasuite.com'
   - name: "ROOT_PASSWORD"
     value: 'z3J90?[F03rg*£R9'
+  - name: DEBUG
+    value: 'formio:*'
 image:
   repository: ftcontainerregistryprod.azurecr.io/ft-formio
   pullPolicy: IfNotPresent
