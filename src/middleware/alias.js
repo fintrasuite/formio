@@ -44,7 +44,7 @@ module.exports = function(router) {
 
     // If this is normal request, then pass this middleware.
     /* eslint-disable no-useless-escape */
-    if (!alias || alias.match(/^(form$|form[\?\/])/) || alias === 'spec.json' || alias ===  'config.json' || alias === 'health') {
+    if (!alias || alias.match(/^(form$|form[\?\/])/) || alias === 'spec.json' || alias ===  'config.json' || alias === 'health' || alias === 'metrics') {
       return next();
     }
     /* eslint-enable no-useless-escape */

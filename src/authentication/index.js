@@ -12,9 +12,12 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const util = require('../util/util');
 const _ = require('lodash');
+const client = require('prom-client');
 const debug = {
   authenticate: require('debug')('formio:authentication:authenticate'),
 };
+const collectDefaultMetrics = client.collectDefaultMetrics;
+collectDefaultMetrics();
 
 module.exports = (router) => {
   const audit = router.formio.audit || (() => {});
@@ -416,6 +419,10 @@ module.exports = (router) => {
     logout(req, res) {
       res.setHeader('x-jwt-token', '');
       res.sendStatus(200);
+    },
+    async metrics(req, res) {
+      res.set("Content-Type", client.register.contentType);
+      res.send(await client.register.metrics());
     },
   };
 };

@@ -207,6 +207,11 @@ module.exports = function(config) {
         router.use(router.formio.middleware.permissionHandler);
       }
 
+      //Metrics Handler
+      if (!router.formio.hook.invoke('init', 'metrics', router.formio)) {
+        router.get('/metrics', router.formio.auth.metrics);
+      }
+
       let mongoUrl = config.mongo;
       let mongoConfig = config.mongoConfig ? JSON.parse(config.mongoConfig) : {};
       if (!mongoConfig.hasOwnProperty('connectTimeoutMS')) {
