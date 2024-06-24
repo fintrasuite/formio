@@ -20,7 +20,7 @@ pipeline {
                         ECR_REGISTRY = "851725618713.dkr.ecr.ap-south-1.amazonaws.com"
                         REGISTRY_REPO = "ft-formio"
                         //RM_SLACK_CHANNEL = "ft-svc-deployments"
-                        //RM_SLACK_TOKEN = "08db7e7a-e27d-4760-8295-06fb022bfe05"
+                        //RM_SLACK_TOKEN
                         BUILD_COMMAND = "npm install"
                         DOCKER_IMAGE_TAG = "${BUILD_DATE}-${BUILD_NUMBER}"
                         DOCKER_COMMAND = "aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin ${ECR_REGISTRY}"
