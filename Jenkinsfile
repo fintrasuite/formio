@@ -23,17 +23,14 @@ pipeline {
                         //RM_SLACK_TOKEN = "08db7e7a-e27d-4760-8295-06fb022bfe05"
                         BUILD_COMMAND = "npm install"
                         DOCKER_IMAGE_TAG = "${BUILD_DATE}-${BUILD_NUMBER}"
-                        echo "after docker image tag"
-                        DOCKER_COMMAND = "docker login ${ECR_REGISTRY} --username ${ECR_USERNAME} --password ${ECR_PASSWORD}"
-                        //TAG = "${ECR_REGISTRY}/${REGISTRY_REPO}:${DOCKER_IMAGE_TAG}"
-                        echo $DOCKER_COMMAND
+                        DOCKER_COMMAND = "aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin ${ECR_REGISTRY}"
                         TAG = "${DOCKER_IMAGE_TAG}"
-                        echo "Completed inside env variables"
+                         
                     } 
-                    echo "outside the loop"
+                     
                     commitId = sh(script: "git rev-parse --short HEAD",returnStdout: true)
                     commitMsg = sh(script: """git rev-list --format=%B --max-count=1 ${commitId}""",returnStdout: true) 
-                    echo "Completed definiing env variables"
+                    
                 }
             }
         }
