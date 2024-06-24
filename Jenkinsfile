@@ -26,6 +26,7 @@ pipeline {
                         echo "after docker image tag"
                         DOCKER_COMMAND = "docker login ${ECR_REGISTRY} --username ${ECR_USERNAME} --password ${ECR_PASSWORD}"
                         //TAG = "${ECR_REGISTRY}/${REGISTRY_REPO}:${DOCKER_IMAGE_TAG}"
+                        echo $DOCKER_COMMAND
                         TAG = "${DOCKER_IMAGE_TAG}"
                         echo "Completed inside env variables"
                     } 
