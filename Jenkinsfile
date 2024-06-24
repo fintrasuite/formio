@@ -13,22 +13,17 @@ pipeline {
          stage('Defining environemnt speific variables') {
             steps{
                 script{
-                        /*withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'acr-credentials', usernameVariable: 'ACR_USERNAME', passwordVariable: 'ACR_PASSWORD']]) {*/
-                    withCredentials([
-                            [$class: 'UsernamePasswordMultiBinding', credentialsId: 'acr_credentials', usernameVariable: 'ACR_USERNAME', passwordVariable: 'ACR_PASSWORD'],
-                            //[$class: 'UsernamePasswordMultiBinding', credentialsId: 'acr_credentials_staging', usernameVariable: 'ACR_USERNAME_STAGING', passwordVariable: 'ACR_PASSWORD_STAGING']
-                        ])
-                        {   
-              
+                        /*withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'ECR-credentials', usernameVariable: 'ECR_USERNAME', passwordVariable: 'ECR_PASSWORD']]) {*/
+                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'svc_acct_github', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) { 
                     if (params.ENV_TYPE == 'production') {
-                        ACR_REGISTRY = "ftcontainerregistryprod.azurecr.io"
+                        ECR_REGISTRY = "851725618713.dkr.ecr.ap-south-1.amazonaws.com"
                         REGISTRY_REPO = "ft-formio"
                         //RM_SLACK_CHANNEL = "ft-svc-deployments"
                         //RM_SLACK_TOKEN = "08db7e7a-e27d-4760-8295-06fb022bfe05"
                         BUILD_COMMAND = "npm install"
                         DOCKER_IMAGE_TAG = "${BUILD_DATE}-${BUILD_NUMBER}"
-                        DOCKER_COMMAND = "docker login ${ACR_REGISTRY} --username ${ACR_USERNAME} --password ${ACR_PASSWORD}"
-                        //TAG = "${ACR_REGISTRY}/${REGISTRY_REPO}:${DOCKER_IMAGE_TAG}"
+                        DOCKER_COMMAND = "docker login ${ECR_REGISTRY} --username ${ECR_USERNAME} --password ${ECR_PASSWORD}"
+                        //TAG = "${ECR_REGISTRY}/${REGISTRY_REPO}:${DOCKER_IMAGE_TAG}"
                         TAG = "${DOCKER_IMAGE_TAG}"
                     } 
                     commitId = sh(script: "git rev-parse --short HEAD",returnStdout: true)
@@ -72,7 +67,7 @@ pipeline {
         }
         
        
-        stage ('Docker Build and Push Image to ACR'){
+        stage ('Docker Build and Push Image to ECR'){
             steps{
                 parallel(
                     ftformioui: {
@@ -83,12 +78,12 @@ pipeline {
                             docker version
                             #docker image prune --all
                             npm install 
-                            docker build --no-cache  -f Dockerfile_prod --tag ${ACR_REGISTRY}/${REGISTRY_REPO}:${DOCKER_IMAGE_TAG}  --file Dockerfile_prod . 
+                            docker build --no-cache  -f Dockerfile_prod --tag ${ECR_REGISTRY}/${REGISTRY_REPO}:${DOCKER_IMAGE_TAG}  --file Dockerfile_prod . 
 
                             echo "Executing Docker Commands"
                             set +x; ${DOCKER_COMMAND}&> /dev/null
-                            docker push ${ACR_REGISTRY}/${REGISTRY_REPO}:${DOCKER_IMAGE_TAG}
-                            #aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin ${ACR_REGISTRY}
+                            docker push ${ECR_REGISTRY}/${REGISTRY_REPO}:${DOCKER_IMAGE_TAG}
+                            #aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin ${ECR_REGISTRY}
                             """ 
                         echo "Building docker image for Fintra formio is completed"
                         }
