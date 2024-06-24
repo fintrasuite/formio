@@ -16,6 +16,7 @@ pipeline {
                         /*withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'ECR-credentials', usernameVariable: 'ECR_USERNAME', passwordVariable: 'ECR_PASSWORD']]) {*/
                     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'svc_acct_github', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) { 
                     if (params.ENV_TYPE == 'production') {
+                        echo "hello"
                         ECR_REGISTRY = "851725618713.dkr.ecr.ap-south-1.amazonaws.com"
                         REGISTRY_REPO = "ft-formio"
                         //RM_SLACK_CHANNEL = "ft-svc-deployments"
