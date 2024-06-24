@@ -28,9 +28,11 @@ pipeline {
                     } 
                     commitId = sh(script: "git rev-parse --short HEAD",returnStdout: true)
                     commitMsg = sh(script: """git rev-list --format=%B --max-count=1 ${commitId}""",returnStdout: true) 
+                    echo "Completed definiing env variables"
                 }
             }
-        }}
+        }
+        }
 
         stage('Validate Branch Name') {
                 when { expression { params.BRANCH_NAME != "master" } }
