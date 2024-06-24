@@ -25,6 +25,7 @@ pipeline {
                         DOCKER_COMMAND = "docker login ${ECR_REGISTRY} --username ${ECR_USERNAME} --password ${ECR_PASSWORD}"
                         //TAG = "${ECR_REGISTRY}/${REGISTRY_REPO}:${DOCKER_IMAGE_TAG}"
                         TAG = "${DOCKER_IMAGE_TAG}"
+                        echo "Completed inside env variables"
                     } 
                     commitId = sh(script: "git rev-parse --short HEAD",returnStdout: true)
                     commitMsg = sh(script: """git rev-list --format=%B --max-count=1 ${commitId}""",returnStdout: true) 
