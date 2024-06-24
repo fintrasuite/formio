@@ -4,7 +4,7 @@ namespace: "ft-ui"
 deployment:
   env:
   - name: "NODE_CONFIG"
-    value: '{"mongo": "mongodb+srv://rmmongo:eEdQKzje6lkj9UfY@dev.a58ur6t.mongodb.net/ft-formio?connectTimeoutMS=300000&minPoolSize=1&maxPoolSize=2&maxIdleTimeMS=900000","jwt": {"secret": "3N2Mm9KiDm6QOfhdqo795","expireTime": 240}}'
+    value: '{"mongo": "mongodb+srv://ft_formio_usr:JDCARlABGdgfoOiA@rm-occ-prod.yf1ki.mongodb.net/ft-formio?retryWrites=true&connectTimeoutMS=300000&minPoolSize=1&maxPoolSize=2&maxIdleTimeMS=900000","jwt": {"secret": "3N2Mm9KiDm6QOfhdqo795","expireTime": 240}}'
   - name: "ROOT_EMAIL"
     value: 'devops@fintrasuite.com'
   - name: "ROOT_PASSWORD"
