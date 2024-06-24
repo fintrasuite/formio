@@ -12,7 +12,7 @@ deployment:
   - name: DEBUG
     value: 'formio:*'
 image:
-  repository: ftcontainerregistryprod.azurecr.io/ft-formio
+  repository: 851725618713.dkr.ecr.ap-south-1.amazonaws.com/ft-formio
   pullPolicy: IfNotPresent
   tag: 30-Mar-22
 
